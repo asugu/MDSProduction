@@ -8,3 +8,5 @@ condor/summary*.txt
 *.log
 *_fjr.xml
 __pycache__/
+crab/crab_projects/
+crab/points/

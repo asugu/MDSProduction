@@ -40,7 +40,7 @@ source /cvmfs/cms.cern.ch/cmsset_default.sh
 (cd $ntupler_dir/src && eval "$(scramv1 runtime -sh)" && cd "$workdir" && \
   echo "file:$workdir/fevtsim.root" > inputFiles.txt && \
   cmsRun $ntupler_cfg inputFiles=inputFiles.txt \
-    globalTag=133X_mcRun3_2024_realistic_v8 saveDTSimDigi=True > ntuple.log 2>&1)
+    globalTag=133X_mcRun3_2024_realistic_v8 saveDTSimDigi=True cscStripFiredOnly=True > ntuple.log 2>&1)
 
 # step 5: event maker
 $py $flex_dir/make_event_cluster.py --sample ggH --in ntupled.root --out event_cluster.h5 > event_cluster.log 2>&1

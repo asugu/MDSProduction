@@ -1,0 +1,2 @@
+# M_H [GeV]  M_S [GeV]  ctau [mm]   -- one CRAB task per line
+125 12 900
