@@ -4,7 +4,9 @@ Private Run 3 MC for MDS ML studies, made with **classical pileup mixing** so th
 pileup SimHits are kept (premixing throws them away). Output is FEVTSIM (GEN-SIM-RECO).
 Ntupling is not part of this repo.
 
-Signal: ggH → SS → 4b with a long-lived S, mass and cτ configurable.
+Samples:
+- signal: ggH → SS → 4b with a long-lived S, mass and cτ configurable, LLP filter
+- background: DY → 2μ, Powheg 2024 gridpacks in MLL bins (no filter yet)
 
 ## Recipe
 
@@ -37,7 +39,7 @@ condor/      NAF condor chain used for the first validation (also ran ntupler + 
 ## Setup (once)
 
 ```bash
-cmssw-el8 -B /data/dust       # Give the working directory
+cmssw-el8 -B /data/dust       # make dust visible inside the container
 ./setup/setup_cmssw.sh        # creates/updates CMSSW_13_3_0, installs fragments + filter, compiles
 ```
 
@@ -62,12 +64,13 @@ cd /data/dust/user/guvenlia/production/mds_classical_mix/crab
 NJOBS=1 SUFFIX=smoke ./submit_points.sh                 # 1 job, nothing transferred
 NJOBS=50 TRANSFER=1 SUFFIX=test1 ./submit_points.sh     # 50 jobs, output to T2_DE_DESY
 ```
-One CRAB task is made per line of `crab/points.txt` (`M_H M_S ctau[mm]`).
+One CRAB task is made per line of `crab/points.txt`: `HToSSTo4b M_H M_S ctau[mm]` or `DYto2Mu <MLL bin>`,
+optionally ending in `njobs=N` to give that sample its own number of jobs.
 
 | env var | default | meaning |
 |---|---|---|
 | `NJOBS` | 50 | jobs per point |
-| `EVENTS_PER_JOB` | 100 | generated events per job (about 58% pass the filter) |
+| `EVENTS_PER_JOB` | 100 | generated events per job (signal: about 58% pass the filter) |
 | `TRANSFER` | 0 | 1 = stage out to `/store/user/aguvenli/MDSProduction_test/` at T2_DE_DESY |
 | `AT_DESY` | 0 | 1 = run only at T2_DE_DESY (once the pileup replica is there) |
 | `SUFFIX` | test1 | appended to the CRAB request name |

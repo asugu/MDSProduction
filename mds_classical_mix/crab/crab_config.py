@@ -1,5 +1,5 @@
 # One CRAB task per mass/ctau point; settings come from env vars (see submit_points.sh).
-#   POINT=MH125_MS12_ctau900mm  NJOBS=50  EVENTS_PER_JOB=100  TRANSFER=0|1  AT_DESY=0|1  SUFFIX=test1
+#   POINT=HToSSTo4b_MH125_MS12_ctau900mm  NJOBS=50  EVENTS_PER_JOB=100  TRANSFER=0|1  AT_DESY=0|1  SUFFIX=test1
 import os
 from CRABClient.UserUtilities import config
 config = config()
@@ -21,10 +21,11 @@ config.JobType.psetName = os.path.join(cfg_dir, "gensim_cfg.py")
 config.JobType.scriptExe = "crab_chain.sh"
 config.JobType.inputFiles = [os.path.join(cfg_dir, "digi_cfg.py"), os.path.join(cfg_dir, "reco_cfg.py")]
 config.JobType.outputFiles = ["fevtsim.root"]
+config.JobType.disableAutomaticOutputCollection = True   # else CRAB also stages out gensim.root, which we delete
 config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 8000        # condor test peaked at 5.4 GB with 4 threads
 
-config.Data.outputPrimaryDataset = f"HToSSTo4b_{point}_classicalMix"
+config.Data.outputPrimaryDataset = f"{point}_classicalMix"
 config.Data.splitting = "EventBased"
 config.Data.unitsPerJob = per_job
 config.Data.totalUnits = njobs * per_job

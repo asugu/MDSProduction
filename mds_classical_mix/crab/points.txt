@@ -1,2 +1,14 @@
-# M_H [GeV]  M_S [GeV]  ctau [mm]   -- one CRAB task per line
-125 12 900
+# one CRAB task per line
+#   HToSSTo4b M_H[GeV] M_S[GeV] ctau[mm]
+#   DYto2Mu   MLL bin (2024 Powheg gridpacks, no DY filter yet)
+# optional at the end: njobs=N (else NJOBS, default 50); each job = EVENTS_PER_JOB generated events
+HToSSTo4b 125 12 900
+# DYto2Mu 50to120
+# DYto2Mu 120to200
+# DYto2Mu 200to400
+# DYto2Mu 400to800
+# DYto2Mu 800to1500
+# DYto2Mu 1500to2500
+# DYto2Mu 2500to4000
+# DYto2Mu 4000to6000
+# DYto2Mu 6000
