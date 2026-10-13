@@ -1,0 +1,23 @@
+universe               = vanilla
+executable             = /data/dust/user/guvenlia/production/mds_classical_mix/condor/run_chain.sh
+
+# ClusterId_ProcId keeps resubmits from overwriting; ProcId sets the lumi section
+NGEN                   = 100
+arguments              = $(ClusterId)_$(ProcId) $(NGEN) $(ProcId)
+
+output                 = /data/dust/user/guvenlia/production/mds_classical_mix/condor/logs/job_$(ClusterId)_$(ProcId).out
+error                  = /data/dust/user/guvenlia/production/mds_classical_mix/condor/logs/job_$(ClusterId)_$(ProcId).err
+log                    = /data/dust/user/guvenlia/production/mds_classical_mix/condor/logs/job_$(ClusterId).log
+
+use_x509userproxy      = True
+x509userproxy          = $ENV(X509_USER_PROXY)
+getenv                 = True
+should_transfer_files  = NO
+
+# peak was 5.4 GB at 4 threads (10-job test, 2026-10-12)
+request_cpus           = 4
+request_memory         = 8000M
++RequestRuntime        = 86400
+
+NJOBS                  = 10
+queue $(NJOBS)

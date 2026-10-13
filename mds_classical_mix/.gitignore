@@ -1,0 +1,10 @@
+# outputs and job logs
+test/
+condor/out/
+condor/logs/
+condor/summary*.txt
+*.root
+*.h5
+*.log
+*_fjr.xml
+__pycache__/
