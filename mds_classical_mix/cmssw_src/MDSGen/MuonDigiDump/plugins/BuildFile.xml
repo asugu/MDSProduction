@@ -1,0 +1,13 @@
+<use name="FWCore/Framework"/>
+<use name="FWCore/ParameterSet"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="CommonTools/UtilAlgos"/>
+<use name="DataFormats/CSCDigi"/>
+<use name="DataFormats/DTDigi"/>
+<use name="DataFormats/RPCDigi"/>
+<use name="DataFormats/GEMDigi"/>
+<use name="DataFormats/MuonDetId"/>
+<use name="SimDataFormats/TrackingHit"/>
+<use name="SimDataFormats/CrossingFrame"/>
+<use name="root"/>
+<flags EDM_PLUGIN="1"/>
