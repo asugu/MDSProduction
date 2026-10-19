@@ -1,0 +1,16 @@
+universe               = vanilla
+executable             = /data/dust/user/guvenlia/production/mds_classical_mix/pilot/run_gen.sh
+arguments              = $(tag)
+
+output                 = /data/dust/user/guvenlia/production/mds_classical_mix/pilot/logs/$(tag).out
+error                  = /data/dust/user/guvenlia/production/mds_classical_mix/pilot/logs/$(tag).err
+log                    = /data/dust/user/guvenlia/production/mds_classical_mix/pilot/logs/pilot.log
+
+getenv                 = True
+should_transfer_files  = NO
+request_cpus           = 1
+request_memory         = 3000M
++RequestRuntime        = 259200
+
+# one job per point; columns of tags.txt (written by prepare.sh)
+queue tag, mh, ms, ctau0, near, far, role from /data/dust/user/guvenlia/production/mds_classical_mix/pilot/tags.txt

@@ -6,6 +6,7 @@ MASS_X = 12 # in GeV
 MASS_X = 12 # in GeV
 CTAU_X = 900 # in mm
 WIDTH_X = 2.1925219866666667e-16 # in mm
+DECAY_PDG = 5 # S -> f fbar: 5 b, 1 d, 15 tau
 
 import FWCore.ParameterSet.Config as cms
 
@@ -43,7 +44,7 @@ generator = cms.EDFilter("Pythia8ConcurrentGeneratorFilter",
             "6000113:tau0 = %s" % CTAU_X,
             "6000113:isResonance = on",
             "6000113:mayDecay = on",
-            "6000113:oneChannel = 1 1.0 100 5 -5",
+            "6000113:oneChannel = 1 1.0 100 %d -%d" % (DECAY_PDG, DECAY_PDG),
 # Shut down H0 decays to ordinary particles and A0
             "35:m0 = %s" % MASS_HIGGS,
             "35:mWidth = %s" % WIDTH_HIGGS,

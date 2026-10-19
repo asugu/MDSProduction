@@ -10,3 +10,7 @@ condor/summary*.txt
 __pycache__/
 crab/crab_projects/
 crab/points/
+pilot/out*/
+pilot/logs/
+pilot/plots_*/
+pilot/points/

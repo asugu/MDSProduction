@@ -1,0 +1,16 @@
+# GEN-only pilot: one sample per mass point, generated at ctau0 and reweighted to near/far/any ctau
+#   kind MH[GeV] MS[GeV] ctau0[mm] near[mm] far[mm] role
+HToSSTo4d   125  7   800   250  800   train
+HToSSTo4b   125  15  1700  500  1700  train
+HToSSTo4b   125  25  3000  900  3000  holdout
+HToSSTo4b   125  40  6000  1700 6000  train
+HToSSTo4b   125  55  13000 4000 13000 train
+HToSSTo4b   400  50  1800  500  1800  train
+HToSSTo4b   400  100 4000  1200 4000  holdout
+HToSSTo4b   400  180 15000 4000 15000 train
+HToSSTo4b   1000 25  350   100  350   train
+HToSSTo4b   1000 50  700   200  700   train
+HToSSTo4b   1000 150 2200  650  2200  holdout
+HToSSTo4b   1000 400 9000  2700 9000  train
+HToSSTo4tau 125  15  1700  500  1700  train
+HToSSTo4d   125  40  6000  1700 6000  train
