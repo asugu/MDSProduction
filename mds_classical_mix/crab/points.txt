@@ -1,14 +1,49 @@
 # one CRAB task per line
-#   HToSSTo4b M_H[GeV] M_S[GeV] ctau[mm]
+#   HToSSTo4b M_H[GeV] M_S[GeV] ctau[mm]   (also HToSSTo4d, HToSSTo4tau)
 #   DYto2Mu   MLL bin (2024 Powheg gridpacks, no DY filter yet)
-# optional at the end: njobs=N (else NJOBS, default 50); each job = EVENTS_PER_JOB generated events
-HToSSTo4b 125 12 900
-# DYto2Mu 50to120
-# DYto2Mu 120to200
-# DYto2Mu 200to400
-# DYto2Mu 400to800
-# DYto2Mu 800to1500
-# DYto2Mu 1500to2500
-# DYto2Mu 2500to4000
-# DYto2Mu 4000to6000
-# DYto2Mu 6000
+# optional at the end: njobs=N, events=N (generated events per job; else NJOBS=50, EVENTS_PER_JOB=100),
+#   tracker = also keep tracker hits/clusters for global muon reco (tag gets _trk), e.g.  DYto2Mu 50to120 tracker
+# production: signal 750 x 1000 ev per point (~435k saved), DY 666 x 1000 ev per bin; ~2 lines (~1500 jobs) per batch
+
+# publish test (submitted 2026-10-18)
+# HToSSTo4b 125 12 900 events=50
+
+# signal grid (GEN pilot 2026-10-15, ctau = peak of filter-box acceptance); HO = held out of training
+# batch 1
+# HToSSTo4b   125  15   1000  njobs=750 events=1000
+# HToSSTo4b   125  25   1700  njobs=750 events=1000    # HO
+# batch 2
+# HToSSTo4b   125  40   3000  njobs=750 events=1000
+# HToSSTo4b   125  55   4500  njobs=750 events=1000
+# batch 3
+# HToSSTo4b   400  50   1300  njobs=750 events=1000
+# HToSSTo4b   400  100  2700  njobs=750 events=1000    # HO
+# batch 4
+# HToSSTo4b   400  180  6700  njobs=750 events=1000
+# HToSSTo4b   1000 25   300   njobs=750 events=1000
+# batch 5
+# HToSSTo4b   1000 50   550   njobs=750 events=1000
+# HToSSTo4b   1000 150  1800  njobs=750 events=1000    # HO
+# batch 6
+HToSSTo4b   1000 400  6700  njobs=750 events=1000
+HToSSTo4tau 125  15   1000  njobs=750 events=1000
+# batch 7
+# HToSSTo4d   125  7    500   njobs=750 events=1000
+# HToSSTo4d   125  40   3000  njobs=750 events=1000
+
+# DY, slim skim
+# batch 8
+# DYto2Mu 50to120     njobs=666 events=1000
+# DYto2Mu 120to200    njobs=666 events=1000
+# DYto2Mu 200to400    njobs=666 events=1000
+# batch 9
+# DYto2Mu 400to800    njobs=666 events=1000
+# DYto2Mu 800to1500   njobs=666 events=1000
+# DYto2Mu 1500to2500  njobs=666 events=1000
+# batch 10
+# DYto2Mu 2500to4000  njobs=666 events=1000
+# DYto2Mu 4000to6000  njobs=666 events=1000
+# DYto2Mu 6000        njobs=666 events=1000
+
+# DY with tracker collections (later)
+# DYto2Mu 50to120 tracker njobs=1000 events=1000
