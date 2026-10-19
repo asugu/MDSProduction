@@ -3,7 +3,7 @@
 set -e
 cmsRun -j gensim_fjr.xml PSet.py
 cmsRun -j digi_fjr.xml digi_cfg.py
-rm -f gensim.root
+rm -f skim.root   # GEN-SIM output; RECO writes the real skim.root
 # CRAB reads FrameworkJobReport.xml, so the last step writes it
 cmsRun -j FrameworkJobReport.xml reco_cfg.py
 rm -f digi.root

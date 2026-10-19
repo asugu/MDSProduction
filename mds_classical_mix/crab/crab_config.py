@@ -1,5 +1,6 @@
 # One CRAB task per mass/ctau point; settings come from env vars (see submit_points.sh).
 #   POINT=HToSSTo4b_MH125_MS12_ctau900mm  NJOBS=50  EVENTS_PER_JOB=100  TRANSFER=0|1  AT_DESY=0|1  SUFFIX=test1
+#   PUBLISH=0|1  OUTDIR=/store/user/aguvenli/MDSProduction_test/
 import os
 from CRABClient.UserUtilities import config
 config = config()
@@ -20,8 +21,7 @@ config.JobType.pluginName = "PrivateMC"
 config.JobType.psetName = os.path.join(cfg_dir, "gensim_cfg.py")
 config.JobType.scriptExe = "crab_chain.sh"
 config.JobType.inputFiles = [os.path.join(cfg_dir, "digi_cfg.py"), os.path.join(cfg_dir, "reco_cfg.py")]
-config.JobType.outputFiles = ["fevtsim.root"]
-config.JobType.disableAutomaticOutputCollection = True   # else CRAB also stages out gensim.root, which we delete
+# output = the PSet output file skim.root (overwritten by the RECO step), so CRAB stages it out as EDM and can publish it
 config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 8000        # condor test peaked at 5.4 GB with 4 threads
 
@@ -29,8 +29,9 @@ config.Data.outputPrimaryDataset = f"{point}_classicalMix"
 config.Data.splitting = "EventBased"
 config.Data.unitsPerJob = per_job
 config.Data.totalUnits = njobs * per_job
-config.Data.publication = False
-config.Data.outLFNDirBase = "/store/user/aguvenli/MDSProduction_test/"
+config.Data.publication = os.environ.get("PUBLISH", "0") == "1"
+config.Data.outputDatasetTag = f"MDSProd_{suffix}"
+config.Data.outLFNDirBase = os.environ.get("OUTDIR", "/store/user/aguvenli/MDSProduction_test/")
 
 config.Site.storageSite = "T2_DE_DESY"
 if os.environ.get("AT_DESY", "0") == "1":   # once the pileup replica is at DESY
